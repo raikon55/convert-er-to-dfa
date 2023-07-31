@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 6.4.--><structure>
+	<type>re</type>
+	<!--The regular expression.-->
+	<!-- <expression>(a*b*c*)+(a*+b)</expression> -->
+	<expression>ab+a*</expression>
+</structure>
