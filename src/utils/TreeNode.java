@@ -1,6 +1,6 @@
 package utils;
 
-class TreeNode {
+public class TreeNode {
     String value;
     TreeNode left;
     TreeNode right;

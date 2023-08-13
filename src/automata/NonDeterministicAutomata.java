@@ -1,12 +1,16 @@
 package automata;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import regexp.RegularExpression;
 import utils.AutomataFactory;
+import utils.ExpressionParser;
+import utils.TreeNode;
 
 public class NonDeterministicAutomata {
     private int totalStates = 0;
@@ -24,10 +28,15 @@ public class NonDeterministicAutomata {
         if (!regExp.isValid()) {
             return;
         }
-
-        final AutomataFactory factory = new AutomataFactory();
-
         this.alphabet = regExp.getAlphabet();
+
+        Map<String, TreeNode> subExpressions = new HashMap<>();
+        final AutomataFactory factory = new AutomataFactory();
+        String formattedExpression = ExpressionParser.parseExpression(regExp.getExpression());
+        TreeNode root = ExpressionParser.buildAST(formattedExpression, subExpressions);
+        State result = ExpressionParser.evaluateAST(root, factory);
+        // factory.create(result, result);
+        factory.showAutomata();
     }
 
     @Override
