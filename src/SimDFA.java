@@ -39,9 +39,9 @@ public class SimDFA {
         // String file = scanner.nextLine();
         String file = "test/teste-dfa.jff";
         DeterministicAutomata dfa = new DeterministicAutomata(file);
-        System.out.println(dfa);
         // WriteAutomata()
-        TestEntry("pub.in", dfa);        
+        TestEntry("pub.in", dfa);    
+        System.out.println(dfa);
     }
 }
 

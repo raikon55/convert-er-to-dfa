@@ -22,6 +22,10 @@ public class State {
         return this.id;
     }
 
+    public boolean getInitial(){
+        return this.initial;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
