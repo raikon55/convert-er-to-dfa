@@ -89,9 +89,8 @@ public class DeterministicAutomata {
                         // System.out.println("TRANSITIONS " + from + " " + to + " " + symbol);
                         Transition t = new Transition(this.states.get(Integer.parseInt(from)), this.states.get(Integer.parseInt(to)), charSymbol);
                         this.transitions.add(t);
-                        List<Transition> aux = this.states.get(Integer.parseInt(from)).getTransitions();
-                        aux.add(t);
-                        this.states.get(Integer.parseInt(from)).setTransitions(aux);
+                        this.states.get(Integer.parseInt(from)).setTransition(t);
+                        // this.states.get(Integer.parseInt(from)).setTransitions(aux);
                         this.alphabet.add(charSymbol);
                         break;
                     default:

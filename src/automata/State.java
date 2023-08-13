@@ -66,6 +66,10 @@ public class State {
         return this.transitions;
     }
 
+    public void setTransition(Transition t){
+        this.transitions.add(t);
+    }
+
     public void setTransitions(List<Transition> transactions) {
         this.transitions = transactions;
     }
