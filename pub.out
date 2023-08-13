@@ -1,5 +1,8 @@
-Sample ab accept
+Sample ab Reject
 Sample a Reject
 Sample aaaa Reject
-Sample aaa Reject
-Sample bb accept
+Sample aaa accept
+Sample bb Reject
+Sample abca accept
+Sample  Reject
+Sample ababa accept

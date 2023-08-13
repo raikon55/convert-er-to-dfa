@@ -2,8 +2,8 @@
 	<type>fa</type>
 	<automaton>
 		<state id="1" name="q1">
-			<x>22</x>
-			<y>17</y>
+			<x>45</x>
+			<y>86</y>
 		</state>
 		<transition>
 			<from>1</from>
@@ -36,8 +36,8 @@
 			<read>a</read>
 		</transition>
 		<state id="2" name="q2">
-			<x>84</x>
-			<y>49</y>
+			<x>12</x>
+			<y>90</y>
 		</state>
 		<transition>
 			<from>2</from>
@@ -45,28 +45,28 @@
 			<read>a</read>
 		</transition>
 		<state id="3" name="q3">
-			<x>19</x>
+			<x>17</x>
+			<y>81</y>
+		</state>
+		<transition>
+			<from>3</from>
+			<to>17</to>
+			<read/>
+		</transition>
+		<state id="4" name="q4">
+			<x>27</x>
+			<y>69</y>
+		</state>
+		<transition>
+			<from>4</from>
+			<to>5</to>
+			<read>b</read>
+		</transition>
+		<state id="5" name="q5">
+			<x>83</x>
 			<y>56</y>
 		</state>
 		<transition>
-			<from>3</from>
-			<to>17</to>
-			<read/>
-		</transition>
-		<state id="4" name="q4">
-			<x>75</x>
-			<y>45</y>
-		</state>
-		<transition>
-			<from>4</from>
-			<to>5</to>
-			<read>b</read>
-		</transition>
-		<state id="5" name="q5">
-			<x>91</x>
-			<y>68</y>
-		</state>
-		<transition>
 			<from>5</from>
 			<to>14</to>
 			<read/>
@@ -77,8 +77,8 @@
 			<read/>
 		</transition>
 		<state id="6" name="q6">
-			<x>72</x>
-			<y>95</y>
+			<x>81</x>
+			<y>98</y>
 		</state>
 		<transition>
 			<from>6</from>
@@ -126,8 +126,8 @@
 			<read>c</read>
 		</transition>
 		<state id="7" name="q7">
-			<x>96</x>
-			<y>17</y>
+			<x>18</x>
+			<y>76</y>
 		</state>
 		<transition>
 			<from>7</from>
@@ -135,241 +135,8 @@
 			<read/>
 		</transition>
 		<state id="8" name="q8">
-			<x>91</x>
-			<y>20</y>
-		</state>
-		<transition>
-			<from>8</from>
-			<to>9</to>
-			<read>a</read>
-		</transition>
-		<state id="9" name="q9">
-			<x>80</x>
-			<y>61</y>
-		</state>
-		<transition>
-			<from>9</from>
-			<to>10</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>9</from>
-			<to>13</to>
-			<read/>
-		</transition>
-		<state id="11" name="q11">
-			<x>94</x>
-			<y>23</y>
-		</state>
-		<state id="10" name="q10">
-			<x>83</x>
-			<y>27</y>
-		</state>
-		<transition>
-			<from>10</from>
-			<to>11</to>
-			<read>b</read>
-		</transition>
-		<state id="13" name="q13">
-			<x>87</x>
-			<y>53</y>
-		</state>
-		<state id="12" name="q12">
-			<x>98</x>
-			<y>6</y>
-		</state>
-		<transition>
-			<from>12</from>
-			<to>6</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>12</from>
-			<to>8</to>
-			<read/>
-		</transition>
-		<state id="15" name="q15">
-			<x>90</x>
-			<y>55</y>
-		</state>
-		<state id="14" name="q14">
-			<x>33</x>
-			<y>71</y>
-		</state>
-		<transition>
-			<from>14</from>
-			<to>12</to>
-			<read/>
-		</transition>
-		<state id="17" name="q17">
-			<x>23</x>
-			<y>59</y>
-		</state>
-		<state id="16" name="q16">
-			<x>53</x>
-			<y>72</y>
-		</state>
-		<transition>
-			<from>16</from>
-			<to>2</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>16</from>
-			<to>4</to>
-			<read/>
-		</transition>
-		<state id="0" name="q0">
-			<x>41</x>
-			<y>74</y>
-			<initial/>
-		</state>
-		<transition>
-			<from>0</from>
-			<to>1</to>
-			<read>a</read>
-		</transition>
-	</automaton>
-</structure>
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
-	<type>fa</type>
-	<automaton>
-		<state id="1" name="q1">
-			<x>96</x>
-			<y>48</y>
-		</state>
-		<transition>
-			<from>1</from>
-			<to>2</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>4</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>16</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>2</to>
-			<read>a</read>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>4</to>
-			<read>a</read>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>16</to>
-			<read>a</read>
-		</transition>
-		<state id="2" name="q2">
-			<x>83</x>
-			<y>19</y>
-		</state>
-		<transition>
-			<from>2</from>
-			<to>3</to>
-			<read>a</read>
-		</transition>
-		<state id="3" name="q3">
-			<x>96</x>
-			<y>60</y>
-		</state>
-		<transition>
-			<from>3</from>
-			<to>17</to>
-			<read/>
-		</transition>
-		<state id="4" name="q4">
-			<x>61</x>
-			<y>19</y>
-		</state>
-		<transition>
-			<from>4</from>
-			<to>5</to>
-			<read>b</read>
-		</transition>
-		<state id="5" name="q5">
-			<x>84</x>
-			<y>54</y>
-		</state>
-		<transition>
-			<from>5</from>
-			<to>14</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>5</from>
-			<to>17</to>
-			<read/>
-		</transition>
-		<state id="6" name="q6">
-			<x>59</x>
-			<y>51</y>
-		</state>
-		<transition>
-			<from>6</from>
-			<to>6</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>8</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>15</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>12</to>
-			<read/>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>6</to>
-			<read>a</read>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>8</to>
-			<read>a</read>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>15</to>
-			<read>a</read>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>12</to>
-			<read>a</read>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>7</to>
-			<read>c</read>
-		</transition>
-		<state id="7" name="q7">
-			<x>36</x>
-			<y>75</y>
-		</state>
-		<transition>
-			<from>7</from>
-			<to>13</to>
-			<read/>
-		</transition>
-		<state id="8" name="q8">
-			<x>99</x>
-			<y>36</y>
+			<x>51</x>
+			<y>47</y>
 		</state>
 		<transition>
 			<from>8</from>
@@ -378,7 +145,7 @@
 		</transition>
 		<state id="9" name="q9">
 			<x>73</x>
-			<y>29</y>
+			<y>76</y>
 		</state>
 		<transition>
 			<from>9</from>
@@ -391,12 +158,12 @@
 			<read/>
 		</transition>
 		<state id="11" name="q11">
-			<x>48</x>
-			<y>62</y>
+			<x>61</x>
+			<y>87</y>
 		</state>
 		<state id="10" name="q10">
-			<x>76</x>
-			<y>44</y>
+			<x>78</x>
+			<y>52</y>
 		</state>
 		<transition>
 			<from>10</from>
@@ -404,12 +171,12 @@
 			<read>b</read>
 		</transition>
 		<state id="13" name="q13">
-			<x>25</x>
-			<y>97</y>
+			<x>94</x>
+			<y>50</y>
 		</state>
 		<state id="12" name="q12">
-			<x>27</x>
-			<y>8</y>
+			<x>55</x>
+			<y>33</y>
 		</state>
 		<transition>
 			<from>12</from>
@@ -422,12 +189,12 @@
 			<read/>
 		</transition>
 		<state id="15" name="q15">
-			<x>38</x>
-			<y>81</y>
+			<x>73</x>
+			<y>46</y>
 		</state>
 		<state id="14" name="q14">
-			<x>12</x>
-			<y>35</y>
+			<x>67</x>
+			<y>41</y>
 		</state>
 		<transition>
 			<from>14</from>
@@ -435,12 +202,12 @@
 			<read/>
 		</transition>
 		<state id="17" name="q17">
-			<x>53</x>
-			<y>86</y>
+			<x>19</x>
+			<y>72</y>
 		</state>
 		<state id="16" name="q16">
-			<x>43</x>
-			<y>67</y>
+			<x>96</x>
+			<y>84</y>
 		</state>
 		<transition>
 			<from>16</from>
@@ -453,8 +220,8 @@
 			<read/>
 		</transition>
 		<state id="0" name="q0">
-			<x>9</x>
-			<y>34</y>
+			<x>71</x>
+			<y>29</y>
 			<initial/>
 		</state>
 		<transition>

@@ -37,9 +37,8 @@ public class SimDFA {
     public static void main(String[]args){
         // Scanner scanner = new Scanner(System.in);
         // String file = scanner.nextLine();
-        String file = "test/teste-dfa.jff";
+        String file = "test/completo.jff";
         DeterministicAutomata dfa = new DeterministicAutomata(file);
-        // WriteAutomata()
         TestEntry("pub.in", dfa);    
         System.out.println(dfa);
     }
