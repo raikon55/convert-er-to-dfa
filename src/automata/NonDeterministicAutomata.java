@@ -45,7 +45,6 @@ public class NonDeterministicAutomata {
         Map<String, TreeNode> subExpressions = new HashMap<>();
         final AutomataFactory factory = new AutomataFactory();
         String formattedExpression = ExpressionParser.parseExpression(regExp.getExpression());
-        System.out.println(formattedExpression);
         TreeNode root = ExpressionParser.buildAST(formattedExpression, subExpressions);
         this.initial = ExpressionParser.evaluateAST(root, factory);
         this.NFtable = factory.getStates();
