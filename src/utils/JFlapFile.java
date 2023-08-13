@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import automata.DeterministicAutomata;
+
 public class JFlapFile {
     private String regularExpression = "";
     private String filename = "";
