@@ -11,7 +11,6 @@ public class SimDFA {
     public static void TestEntry(String filePath, DeterministicAutomata dfa){
         String line = "";
         try {
-            System.out.println(dfa);
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             BufferedWriter writer = new BufferedWriter(new FileWriter("pub.out"));
             while ((line = reader.readLine()) != null) {
@@ -39,9 +38,10 @@ public class SimDFA {
         // Scanner scanner = new Scanner(System.in);
         // String file = scanner.nextLine();
         String file = "test/teste-dfa.jff";
-        // DeterministicAutomata dfa = new DeterministicAutomata(file);
+        DeterministicAutomata dfa = new DeterministicAutomata(file);
         // WriteAutomata()
-        // TestEntry("pub.in", dfa);        
+        TestEntry("pub.in", dfa);    
+        System.out.println(dfa);
     }
 }
 

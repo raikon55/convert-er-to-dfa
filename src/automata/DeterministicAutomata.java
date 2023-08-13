@@ -89,9 +89,7 @@ public class DeterministicAutomata {
                         // System.out.println("TRANSITIONS " + from + " " + to + " " + symbol);
                         Transition t = new Transition(this.states.get(Integer.parseInt(from)), this.states.get(Integer.parseInt(to)), charSymbol);
                         this.transitions.add(t);
-                        List<Transition> aux = this.states.get(Integer.parseInt(from)).getTransitions();
-                        aux.add(t);
-                        this.states.get(Integer.parseInt(from)).setTransitions(aux);
+                        this.states.get(Integer.parseInt(from)).setTransition(t);
                         this.alphabet.add(charSymbol);
                         break;
                     default:
@@ -112,11 +110,35 @@ public class DeterministicAutomata {
 
 
     
-
-
     public boolean sampleTest(String sample){
+        sample+=" ";
+        for (State state : this.states) {
+            if(state.getInitial())
+                return sampleTest(state, sample,0);
+        }
+        return false;
+    }
 
-        return true;
+    public boolean sampleTest(State state, String sample, int pos){
+        boolean resp = false;
+        List<Transition> stateTransition = state.getTransitions();
+        System.out.println(sample.charAt(pos));
+        if(sample.charAt(pos) != ' '){
+            for (Transition transition : stateTransition) {
+                System.out.println(transition);
+                if(transition.getSymbol() == sample.charAt(pos)){
+                    System.out.println("------");
+                    System.out.println(transition.getTo().getInternalName()); 
+                    return sampleTest(transition.getTo(), sample, ++pos);
+                }
+                          
+            }
+        }else{
+            if(state.isAccept())
+                resp = true;
+        }
+        System.out.println(resp);
+        return resp;
     }
 
     @Override

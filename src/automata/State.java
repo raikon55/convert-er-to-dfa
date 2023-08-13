@@ -22,6 +22,10 @@ public class State {
         return this.id;
     }
 
+    public boolean getInitial(){
+        return this.initial;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -64,6 +68,10 @@ public class State {
 
     public List<Transition> getTransitions() {
         return this.transitions;
+    }
+
+    public void setTransition(Transition t){
+        this.transitions.add(t);
     }
 
     public void setTransitions(List<Transition> transactions) {
