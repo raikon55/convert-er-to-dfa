@@ -11,6 +11,8 @@ import java.util.Set;
 
 import automata.State;
 
+import automata.DeterministicAutomata;
+
 public class JFlapFile {
     private String regularExpression = "";
     private String filename = "";

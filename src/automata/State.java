@@ -7,6 +7,7 @@ public class State {
     private int id;
     private String name = null;
     private boolean accept = false;
+    private boolean initial = false;
     private boolean selected = false;
     private String internalName = null;
     private List<Transition> transitions = new ArrayList<>();
@@ -49,6 +50,14 @@ public class State {
         return this.selected;
     }
 
+    public void setInitial(boolean initial){
+        this.initial = initial;
+    }
+
+    public void setAccept(boolean accept) {
+        this.accept = accept;
+    }
+
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
@@ -63,7 +72,7 @@ public class State {
 
     @Override
     public String toString() {
-        return "[ name=" + this.internalName + ", trasitions=" + this.transitions + ", final=" + this.accept + " ]";
+        return "[ name=" + this.internalName + ", trasitions=" + this.transitions + ", initial=" + this.initial + ", final=" + this.accept + " ]";
     }
 
     @Override
