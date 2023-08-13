@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import automata.State;
 import automata.Transition;
@@ -40,25 +41,20 @@ public class AutomataFactory {
         finals = this.getFinalState(firstAutomata, finals);
 
         for (State state : finals) {
-            Transition lambdaTransition = new Transition(state, secondAutomata, SpecialSymbols.cLAMBDA);
+            Transition lambdaTransition = new Transition(state, secondAutomata,
+                    SpecialSymbols.cLAMBDA);
             state.getTransitions().add(lambdaTransition);
             this.updateTable(state, secondAutomata, SpecialSymbols.LAMBDA);
         }
     }
 
     public Set<State> getFinalState(State automata, Set<State> finals) {
-        if (finals.contains(automata)) {
-            return finals;
-        }
-
-        if (automata.isAccept()) {
-            finals.add(automata);
-        }
-
-        this.NFtable.get(automata.getInternalName()).forEach((key, states) -> {
-            for (State state : states) {
-                this.getFinalState(state, finals);
-            }
+        this.NFtable.forEach((from, transitions) -> {
+            transitions.forEach((symbol, to) -> {
+                finals.addAll(to.stream()
+                        .filter(state -> state.isAccept())
+                        .collect(Collectors.toList()));
+            });
         });
 
         return finals;

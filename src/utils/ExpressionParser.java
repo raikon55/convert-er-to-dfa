@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 import automata.State;
 
 public class ExpressionParser {
-
     private static boolean isOperator(String token) {
         return token.equals(SpecialSymbols.CONCAT) || token.equals(SpecialSymbols.UNION)
                 || token.equals(SpecialSymbols.STAR);
@@ -24,22 +23,40 @@ public class ExpressionParser {
         Map<String, TreeNode> subExpressions = new HashMap<>();
         expression = evaluateParenthesis(expression, control, subExpressions);
 
+        System.out.println(expression);
+        System.out.println(subExpressions);
+
         String[] tokens = expression.split(" ");
 
         List<TreeNode> tokenStack = new ArrayList<>();
         Deque<TreeNode> expressionStack = new ArrayDeque<>();
 
+        if (!subExpressions.isEmpty()) {
+            expandVariables(subExpressions);
+        }
+
         for (String token : tokens) {
-            final TreeNode node = new TreeNode(token);
-            tokenStack.add(node);
+            if (subExpressions.containsKey(token)) {
+                tokenStack.add(subExpressions.get(token));
+            } else {
+                final TreeNode node = new TreeNode(token);
+                tokenStack.add(node);
+            }
         }
 
         while (!tokenStack.isEmpty()) {
-            final TreeNode node = tokenStack.remove(0);
+            TreeNode node = tokenStack.remove(0);
+
+            if (subExpressions.containsKey(node.value)) {
+                node = subExpressions.get(node.value);
+            }
 
             if (isOperator(node.value)) {
                 if (node.value.equals(SpecialSymbols.STAR)) {
                     node.left = expressionStack.pop();
+                    // if (subExpressions.containsKey(node.left.value)) {
+                    //     tokenStack.add(subExpressions.get(node.left.value));
+                    // }
                     expressionStack.push(node);
                 } else {
                     final TreeNode lastStacked = expressionStack.pop();
@@ -111,14 +128,34 @@ public class ExpressionParser {
         return expression;
     }
 
+    private static void expandVariables(Map<String, TreeNode> expressions) {
+        expressions.forEach((key, value) -> {
+            TreeNode root = expressions.get(key);
+
+            if (expressions.containsKey(root.value)) {
+                root = expressions.get(root.value);
+            }
+
+            if (Objects.nonNull(root.left) &&
+                    expressions.containsKey(root.left.value)) {
+                root.left = expressions.get(root.left.value);
+            }
+
+            if (Objects.nonNull(root.right) &&
+                    expressions.containsKey(root.right.value)) {
+                root.right = expressions.get(root.right.value);
+            }
+
+            expressions.put(key, root);
+        });
+    }
+
     public static void main(String[] args) {
-        // String expression = "a | ( b + ( c + ( ( ( ( ( ( a ) ) ) ) ) + ( a + b ) ) +
-        // b ) * | b ) * | b * | b + !";
-        String expression = "a | b + c + a + a + b * | b * | b * | b + !";
+        String expression = "a | ( b + ( c + ( a ) + ( a + b ) + b ) * | b ) * | b * | b + !";
+        // String expression = "a | b + c + a + a + b * | b * | b * | b + !";
         // String expression = "a + b";
         AutomataFactory automataFactory = new AutomataFactory();
         TreeNode root = buildAST(expression);
-        System.out.println(root);
         State result = evaluateAST(root, automataFactory);
         // automataFactory.create(result, result);
         automataFactory.showAutomata();
