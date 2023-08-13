@@ -10,6 +10,7 @@ import java.util.Set;
 import regexp.RegularExpression;
 import utils.AutomataFactory;
 import utils.ExpressionParser;
+import utils.SpecialSymbols;
 import utils.TreeNode;
 
 public class NonDeterministicAutomata {
@@ -44,7 +45,28 @@ public class NonDeterministicAutomata {
         TreeNode root = ExpressionParser.buildAST(formattedExpression, subExpressions);
         this.initial = ExpressionParser.evaluateAST(root, factory);
         this.NFtable = factory.getStates();
-        // factory.create(result, result);
+
+        factory.lambdaClosure(this);
+    }
+
+    public Set<State> walkInAutomata(State root, char symbol) {
+        Set<State> states = new HashSet<>();
+
+        for (Transition transition : root.getTransitions()) {
+            if (transition.isSelected()) {
+                return states;
+            }
+            transition.setSelected(true);
+            if (transition.getSymbol() == SpecialSymbols.cLAMBDA) {
+                states.addAll(this.walkInAutomata(transition.getTo(), SpecialSymbols.cLAMBDA));
+            }
+
+            if (transition.getSymbol() == symbol) {
+                states.add(transition.getTo());
+            }
+        }
+
+        return states;
     }
 
     @Override

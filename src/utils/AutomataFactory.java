@@ -1,11 +1,16 @@
 package utils;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import automata.NonDeterministicAutomata;
 import automata.State;
 import automata.Transition;
 
@@ -55,22 +60,6 @@ public class AutomataFactory {
         });
 
         return finals;
-    }
-
-    public Set<State> walkInAutomata(State root, char symbol) {
-        Set<State> states = new HashSet<>();
-
-        for (Transition transition : root.getTransitions()) {
-            if (transition.getSymbol() == SpecialSymbols.cLAMBDA) {
-                states.addAll(this.walkInAutomata(transition.getTo(), symbol));
-            }
-
-            if (transition.getSymbol() == symbol) {
-                states.add(transition.getTo());
-            }
-        }
-
-        return states;
     }
 
     public State concat(final State from, final State to) {
@@ -135,6 +124,36 @@ public class AutomataFactory {
         this.updateTable(initial, initialState, SpecialSymbols.LAMBDA);
 
         return initial;
+    }
+
+    public void lambdaClosure(NonDeterministicAutomata nda) {
+        Deque<State> stack = new ArrayDeque<>();
+
+        nda.getStates()
+                .values()
+                .forEach(entries -> {
+                    entries.forEach((symbol, to) -> {
+                        to.forEach(state -> {
+                            if (!stack.contains(state)) {
+                                stack.addFirst(state);
+                            }
+                        });
+                    });
+                });
+
+        stack.addFirst(nda.getAutomata());
+
+        stack.forEach(state -> {
+            nda.getAlphabet().forEach(symbol -> {
+                Set<State> statesFromLambda = nda.walkInAutomata(state, symbol);
+                if (!statesFromLambda.isEmpty() && !symbol.equals(SpecialSymbols.cLAMBDA)) {
+                    statesFromLambda.forEach(to -> {
+                        state.getTransitions().add(new Transition(state, to, symbol));
+                        updateTable(state, to, Character.toString(symbol));
+                    });
+                }
+            });
+        });
     }
 
     public void showAutomata() {

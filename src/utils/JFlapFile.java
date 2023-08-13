@@ -66,43 +66,55 @@ public class JFlapFile {
         String filename = "test/afd.jff";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
-            writer.append(
-                    "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><!--Created with JFLAP 6.4.--><structure>\n");
+            writer.write(
+                    "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><!--Created with JFLAP 7.1.--><structure>\n");
             writer.append("\t<type>fa</type>\n");
             writer.append("\t<automaton>\n");
 
             NFtable.forEach((from, transitions) -> {
                 String state = String.format("\t\t<state id=\"%s\" name=\"%s\">\n", from.replace("q", ""), from);
-                String x_coord = String.format("\t\t\t<x>%f</x>\n", Math.random() % 1000);
-                String y_coord = String.format("\t\t\t<y>%f</y>\n\t\t</state>\n", Math.random() % 1000);
+                String x_coord = String.format("\t\t\t<x>%d</x>\n", (int) (Math.random() * 100) % 1000);
+                String y_coord = String.format("\t\t\t<y>%d</y>\n", (int) (Math.random() * 100) % 1000);
+
+                if (from.equals("q0")) {
+                    y_coord += "\t\t\t<initial/>\n\t\t</state>\n";
+                } else {
+                    y_coord += "\t\t</state>\n";
+                }
 
                 try {
                     writer.append(state + x_coord + y_coord);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
+
                 transitions.forEach((symbol, to) -> {
-                    System.out.println("\tSymbol=" + symbol + ":");
                     to.forEach(t -> {
-                        String transition = String
-                                .format("\t\t<transition>\n\t\t\t<from>%d</from>\n\t\t\t<to>%d</to>\n\t\t\t<read>%s<read/>\n\t\t</transition>\n",
-                                        Integer.parseInt(from.replace("q", "")), t.getId(), symbol);
+                        String transition = "";
+                        if (symbol.equals(SpecialSymbols.LAMBDA)) {
+                            transition = String
+                                    .format("\t\t<transition>\n\t\t\t<from>%d</from>\n\t\t\t<to>%d</to>\n\t\t\t<read/>\n\t\t</transition>\n",
+                                            Integer.parseInt(from.replace("q", "")), t.getId(), symbol);
+                        } else {
+                            transition = String
+                                    .format("\t\t<transition>\n\t\t\t<from>%d</from>\n\t\t\t<to>%d</to>\n\t\t\t<read>%s</read>\n\t\t</transition>\n",
+                                            Integer.parseInt(from.replace("q", "")), t.getId(), symbol);
+                        }
+
                         try {
                             writer.append(transition);
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            System.out.println(e.getMessage());
                         }
-                        System.out.println("\t\t" + t);
                     });
                 });
             });
 
             writer.append("\t</automaton>\n");
-            writer.append("\t</structure>\n");
+            writer.append("</structure>\n");
             writer.close();
         } catch (IOException exc) {
             System.out.println(exc.getMessage());
-            exc.printStackTrace();
         }
     }
 }
