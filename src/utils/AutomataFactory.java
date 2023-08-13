@@ -1,7 +1,5 @@
 package utils;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,11 +11,10 @@ import automata.Transition;
 
 public class AutomataFactory {
     private int states = 0;
-    private Deque<State> statesStack = new ArrayDeque<>();
     private Map<String, Map<String, Set<State>>> NFtable = new HashMap<>();
 
-    public State getStates() {
-        return this.statesStack.pop();
+    public Map<String, Map<String, Set<State>>> getStates() {
+        return this.NFtable;
     }
 
     public State createTransition(char input) {

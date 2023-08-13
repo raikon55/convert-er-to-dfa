@@ -9,6 +9,6 @@ public class App {
         jflap.readRegularExpression("./test/sample_test.jff");
         RegularExpression regularExpression = new RegularExpression(jflap.getRegularExpression());
         nda.createAutomataFromRegularExpression(regularExpression);
-        // System.out.println(nda);
+        jflap.writeAutomata(nda.getStates());
     }
 }
