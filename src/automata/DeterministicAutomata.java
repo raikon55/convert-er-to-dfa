@@ -78,20 +78,20 @@ public class DeterministicAutomata {
                         lastElement.setAccept(true);
                         break;
                     case "transition":
-                        String from = scanner.nextLine();
-                        // System.out.println(from + " " + (from.indexOf(">")) + " " + from.indexOf("</from>"));
-                        from = from.substring(from.indexOf(">") + 1,from.lastIndexOf("<"));
-                        String to = scanner.nextLine();
-                        to = to.substring(to.indexOf(">")+1,to.lastIndexOf("<"));
-                        String symbol = scanner.nextLine();
-                        symbol = symbol.substring(symbol.indexOf(">")+1,symbol.lastIndexOf("<"));
-                        char charSymbol = symbol.charAt(0);
-                        // System.out.println("TRANSITIONS " + from + " " + to + " " + symbol);
-                        Transition t = new Transition(this.states.get(Integer.parseInt(from)), this.states.get(Integer.parseInt(to)), charSymbol);
-                        this.transitions.add(t);
-                        this.states.get(Integer.parseInt(from)).setTransition(t);
-                        // this.states.get(Integer.parseInt(from)).setTransitions(aux);
-                        this.alphabet.add(charSymbol);
+                        // String from = scanner.nextLine();
+                        // // System.out.println(from + " " + (from.indexOf(">")) + " " + from.indexOf("</from>"));
+                        // from = from.substring(from.indexOf(">") + 1,from.lastIndexOf("<"));
+                        // String to = scanner.nextLine();
+                        // to = to.substring(to.indexOf(">")+1,to.lastIndexOf("<"));
+                        // String symbol = scanner.nextLine();
+                        // symbol = symbol.substring(symbol.indexOf(">")+1,symbol.lastIndexOf("<"));
+                        // char charSymbol = symbol.charAt(0);
+                        // // System.out.println("TRANSITIONS " + from + " " + to + " " + symbol);
+                        // Transition t = new Transition(this.states.get(Integer.parseInt(from)), this.states.get(Integer.parseInt(to)), charSymbol);
+                        // this.transitions.add(t);
+                        // this.states.get(Integer.parseInt(from)).setTransition(t);
+                        // // this.states.get(Integer.parseInt(from)).setTransitions(aux);
+                        // this.alphabet.add(charSymbol);
                         break;
                     default:
                         break;
