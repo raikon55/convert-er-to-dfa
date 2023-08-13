@@ -128,6 +128,7 @@ public class AutomataFactory {
 
     public void lambdaClosure(NonDeterministicAutomata nda) {
         Deque<State> stack = new ArrayDeque<>();
+        // Set<State> states = new HashSet<>();
 
         nda.getStates()
                 .values()
@@ -143,17 +144,24 @@ public class AutomataFactory {
 
         stack.addFirst(nda.getAutomata());
 
-        stack.forEach(state -> {
+        while (!stack.isEmpty()) {
+            State state = stack.pop();
             nda.getAlphabet().forEach(symbol -> {
-                Set<State> statesFromLambda = nda.walkInAutomata(state, symbol);
-                if (!statesFromLambda.isEmpty() && !symbol.equals(SpecialSymbols.cLAMBDA)) {
+                Set<State> statesFromLambda = new HashSet<>();
+                statesFromLambda.addAll(nda.walkInAutomata(state, symbol, statesFromLambda));
+                if (!statesFromLambda.isEmpty()) {
                     statesFromLambda.forEach(to -> {
-                        state.getTransitions().add(new Transition(state, to, symbol));
-                        updateTable(state, to, Character.toString(symbol));
+                        to.getTransitions().forEach(t -> {
+                            state.getTransitions().add(new Transition(state, t.getTo(), symbol));
+                            updateTable(state, t.getTo(), Character.toString(symbol));
+                        });
                     });
                 }
             });
-        });
+        }
+
+        nda.setStates(NFtable);
+
     }
 
     public void showAutomata() {

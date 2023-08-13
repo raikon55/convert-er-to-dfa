@@ -151,8 +151,9 @@ public class ExpressionParser {
         for (int i = 0; i < expression.length(); i++) {
             String character = Character.toString(c[i]);
             String nextCharacter = (i < (expression.length() - 1)) ? Character.toString(c[i + 1]) : "!";
+
             if (nextCharacter.equals(SpecialSymbols.LAMBDA)) {
-                builder.append("");
+                builder.append(character + " ");
             } else if (character.equals("(") || character.equals(")")) {
                 builder.append(character + " ");
             } else if ((((!isOperator(character) && !isOperator(nextCharacter)) ||
@@ -163,20 +164,8 @@ public class ExpressionParser {
                 builder.append(character + " ");
             }
         }
+
         return builder.toString();
     }
 
-    // public static void main(String[] args) {
-    // Map<String, TreeNode> subExpressions = new HashMap<>();
-    // String expression = "a | ( b + ( c + ( a ) + ( a + b ) + b ) * | b ) * | b *
-    // | b + !";
-    // // String expression = "a | b + c + a + a + b * | b * | b * | b + !";
-    // // String expression = "a + b";
-    // AutomataFactory automataFactory = new AutomataFactory();
-    // TreeNode root = buildAST(expression, subExpressions);
-    // State result = evaluateAST(root, automataFactory);
-    // System.out.println(subExpressions);
-    // // automataFactory.create(result, result);
-    // automataFactory.showAutomata();
-    // }
 }

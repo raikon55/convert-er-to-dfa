@@ -2,7 +2,6 @@ package automata;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,6 +32,10 @@ public class NonDeterministicAutomata {
         return this.NFtable;
     }
 
+    public void setStates(Map<String, Map<String, Set<State>>> NFTable) {
+        this.NFtable = NFTable;
+    }
+
     public void createAutomataFromRegularExpression(RegularExpression regExp) {
         if (!regExp.isValid()) {
             return;
@@ -42,6 +45,7 @@ public class NonDeterministicAutomata {
         Map<String, TreeNode> subExpressions = new HashMap<>();
         final AutomataFactory factory = new AutomataFactory();
         String formattedExpression = ExpressionParser.parseExpression(regExp.getExpression());
+        System.out.println(formattedExpression);
         TreeNode root = ExpressionParser.buildAST(formattedExpression, subExpressions);
         this.initial = ExpressionParser.evaluateAST(root, factory);
         this.NFtable = factory.getStates();
@@ -49,16 +53,20 @@ public class NonDeterministicAutomata {
         factory.lambdaClosure(this);
     }
 
-    public Set<State> walkInAutomata(State root, char symbol) {
-        Set<State> states = new HashSet<>();
+    public Set<State> walkInAutomata(State root, char symbol, Set<State> states) {
 
+        if (root.isSelected()) {
+            return states;
+        }
+
+        root.setSelected(true);
         for (Transition transition : root.getTransitions()) {
             if (transition.isSelected()) {
                 return states;
             }
-            transition.setSelected(true);
             if (transition.getSymbol() == SpecialSymbols.cLAMBDA) {
-                states.addAll(this.walkInAutomata(transition.getTo(), SpecialSymbols.cLAMBDA));
+                states.addAll(this.walkInAutomata(transition.getTo(), SpecialSymbols.cLAMBDA, states));
+                states.addAll(this.walkInAutomata(transition.getTo(), symbol, states));
             }
 
             if (transition.getSymbol() == symbol) {

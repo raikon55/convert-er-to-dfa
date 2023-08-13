@@ -11,8 +11,6 @@ import java.util.Set;
 
 import automata.State;
 
-import automata.DeterministicAutomata;
-
 public class JFlapFile {
     private String regularExpression = "";
     private String filename = "";
@@ -65,7 +63,7 @@ public class JFlapFile {
     public void writeAutomata(Map<String, Map<String, Set<State>>> NFtable) {
         String filename = "test/afd.jff";
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             writer.write(
                     "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><!--Created with JFLAP 7.1.--><structure>\n");
             writer.append("\t<type>fa</type>\n");
