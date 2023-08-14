@@ -2,5 +2,6 @@
 	<type>re</type>
 	<!--The regular expression.-->
 	<!-- <expression>(a*b*c*)+(a*+b)</expression> -->
+	<!-- <expression>a(a+b(c+a(b)*))a</expression> -->
 	<expression>aba</expression>
 </structure>

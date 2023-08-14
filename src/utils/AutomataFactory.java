@@ -1,11 +1,9 @@
 package utils;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -128,10 +126,8 @@ public class AutomataFactory {
 
     public void lambdaClosure(NonDeterministicAutomata nda) {
         Deque<State> stack = new ArrayDeque<>();
-        // Set<State> states = new HashSet<>();
 
-        nda.getStates()
-                .values()
+        nda.getStates().values()
                 .forEach(entries -> {
                     entries.forEach((symbol, to) -> {
                         to.forEach(state -> {
@@ -150,13 +146,22 @@ public class AutomataFactory {
                 Set<State> statesFromLambda = new HashSet<>();
                 statesFromLambda.addAll(nda.walkInAutomata(state, symbol, statesFromLambda));
                 if (!statesFromLambda.isEmpty()) {
+
                     statesFromLambda.forEach(to -> {
+
                         to.getTransitions().forEach(t -> {
-                            state.getTransitions().add(new Transition(state, t.getTo(), symbol));
+                            // System.out.println(state.getInternalName() + " -> " +
+                            // t.getTo().getInternalName() + ":"
+                            // + symbol );
+                            // state.getTransitions().add(new Transition(state, t.getTo(), symbol));
                             updateTable(state, t.getTo(), Character.toString(symbol));
+
                         });
+
                     });
+
                 }
+                NFtable.get(state.getInternalName()).remove(SpecialSymbols.LAMBDA);
             });
         }
 

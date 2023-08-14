@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import regexp.RegularExpression;
@@ -54,23 +55,14 @@ public class NonDeterministicAutomata {
 
     public Set<State> walkInAutomata(State root, char symbol, Set<State> states) {
 
-        if (root.isSelected()) {
-            return states;
+        Set<State> nextStates = NFtable.get(root.getInternalName()).get(Character.toString(symbol));
+        if (Objects.nonNull(nextStates)) {
+            states.addAll(nextStates);
         }
 
-        root.setSelected(true);
-        for (Transition transition : root.getTransitions()) {
-            if (transition.isSelected()) {
-                return states;
-            }
-            if (transition.getSymbol() == SpecialSymbols.cLAMBDA) {
-                states.addAll(this.walkInAutomata(transition.getTo(), SpecialSymbols.cLAMBDA, states));
-                states.addAll(this.walkInAutomata(transition.getTo(), symbol, states));
-            }
-
-            if (transition.getSymbol() == symbol) {
-                states.add(transition.getTo());
-            }
+        Set<State> nextLambdaStates = NFtable.get(root.getInternalName()).get(SpecialSymbols.LAMBDA);
+        if (Objects.nonNull(nextLambdaStates)) {
+            states.addAll(nextLambdaStates);
         }
 
         return states;

@@ -61,7 +61,7 @@ public class JFlapFile {
     }
 
     public void writeAutomata(Map<String, Map<String, Set<State>>> NFtable) {
-        String filename = "test/afd.jff";
+        String filename = "test/dfa.jff";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             writer.write(
                     "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><!--Created with JFLAP 7.1.--><structure>\n");
@@ -74,16 +74,12 @@ public class JFlapFile {
                 String y_coord = String.format("\t\t\t<y>%d</y>\n", (int) (Math.random() * 100) % 1000);
 
                 if (from.equals("q0")) {
-                    y_coord += "\t\t\t<initial/>\n\t\t</state>\n";
-                } else {
-                    y_coord += "\t\t</state>\n";
+                    y_coord += "\t\t\t<initial/>\n";
                 }
-
-                try {
-                    writer.append(state + x_coord + y_coord);
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
+                StringBuilder temp_y_coord = new StringBuilder();
+                temp_y_coord.append(state);
+                temp_y_coord.append(x_coord);
+                temp_y_coord.append(y_coord);
 
                 transitions.forEach((symbol, to) -> {
                     to.forEach(t -> {
@@ -98,6 +94,10 @@ public class JFlapFile {
                                             Integer.parseInt(from.replace("q", "")), t.getId(), symbol);
                         }
 
+                        if (t.isAccept() && !temp_y_coord.toString().contains("final")) {
+                            temp_y_coord.append("\t\t\t<final/>\n");
+                        }
+
                         try {
                             writer.append(transition);
                         } catch (IOException e) {
@@ -105,6 +105,13 @@ public class JFlapFile {
                         }
                     });
                 });
+
+                temp_y_coord.append("\t\t</state>\n");
+                try {
+                    writer.append(temp_y_coord.toString());
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             });
 
             writer.append("\t</automaton>\n");

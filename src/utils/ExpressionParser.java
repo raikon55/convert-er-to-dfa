@@ -153,7 +153,7 @@ public class ExpressionParser {
             String nextCharacter = (i < (expression.length() - 1)) ? Character.toString(c[i + 1]) : "!";
 
             if (nextCharacter.equals(SpecialSymbols.LAMBDA)) {
-                builder.append(character + " ");
+                builder.append(character);
             } else if (character.equals("(") || character.equals(")")) {
                 builder.append(character + " ");
             } else if ((((!isOperator(character) && !isOperator(nextCharacter)) ||
